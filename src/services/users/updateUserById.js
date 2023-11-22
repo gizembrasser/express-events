@@ -11,7 +11,7 @@ const updateUserById = (id, username, password, name, image) => {
     user.username = username ?? user.username;
     user.password = password ?? user.password;
     user.name = name ?? user.name;
-    user.image = pages ?? user.pages;
+    user.image = image ?? user.image;
 
     return user;
 };
