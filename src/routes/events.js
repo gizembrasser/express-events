@@ -4,6 +4,7 @@ import getEventById from "../services/events/getEventById.js";
 import createEvent from "../services/events/createEvent.js";
 import updateEventById from "../services/events/updateEventById.js";
 import deleteEvent from "../services/events/deleteEvent.js";
+import notFoundErrorHandler from "../middleware/notFoundErrorHandler.js";
 
 const router = express.Router();
 
@@ -22,24 +23,22 @@ router.post("/", (req, res) => {
 router.get("/:id", (req, res) => {
     const { id } = req.params;
     const event = getEventById(id);
-
     res.status(200).json(event);
-});
+}, notFoundErrorHandler);
 
 router.put("/:id", (req, res) => {
     const { id } = req.params;
     const { title, description, image, categoryIds, location, startTime, endTime } = req.body;
     const updatedEvent = updateEventById(id, title, description, image, categoryIds, location, startTime, endTime);
     res.status(200).json(updatedEvent);
-});
+}, notFoundErrorHandler);
 
 router.delete("/:id", (req, res) => {
     const { id } = req.params;
     const deletedEventId = deleteEvent(id);
-
     res.status(200).json({
         message: `Event with id ${deletedEventId} was deleted.`
     });
-});
+}, notFoundErrorHandler);
 
 export default router;
