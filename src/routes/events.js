@@ -26,4 +26,11 @@ router.get("/:id", (req, res) => {
     res.status(200).json(event);
 });
 
+router.put("/:id", (req, res) => {
+    const { id } = req.params;
+    const { title, description, image, categoryIds, location, startTime, endTime } = req.body;
+    const updatedEvent = updateEventById(id, title, description, image, categoryIds, location, startTime, endTime);
+    res.status(200).json(updatedEvent);
+});
+
 export default router;
