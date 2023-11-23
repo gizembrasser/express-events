@@ -5,7 +5,7 @@
 
 # Functions in /services
 
-- Users should be able to login. 
+- Users should be able to login. ****
 - Users can create, view, update and delete users. ****
 - Users can create, view, update and delete events. **** 
 - Users can create, view, update and delete categories. ****
