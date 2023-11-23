@@ -4,8 +4,10 @@ import usersRouter from "./routes/users.js";
 import categoriesRouter from "./routes/categories.js";
 import loginRouter from "./routes/login.js";
 import log from "./middleware/logMiddleware.js";
-import * as Sentry from "@sentry/node";
 import "dotenv/config";
+import errorHandler from "./middleware/errorHandler.js";
+import * as Sentry from "@sentry/node";
+import { error } from "winston";
 
 const app = express();
 
@@ -36,6 +38,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(Sentry.Handlers.errorHandler());
+app.use(errorHandler);
 
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
