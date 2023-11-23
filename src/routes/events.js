@@ -17,6 +17,13 @@ router.post("/", (req, res) => {
     const { createdBy, title, description, image, categoryIds, location, startTime, endTime } = req.body;
     const newEvent = createEvent(createdBy, title, description, image, categoryIds, location, startTime, endTime);
     res.status(201).json(newEvent);
-})
+});
+
+router.get("/:id", (req, res) => {
+    const { id } = req.params;
+    const event = getEventById(id);
+
+    res.status(200).json(event);
+});
 
 export default router;
