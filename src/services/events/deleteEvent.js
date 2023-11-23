@@ -1,4 +1,4 @@
-import eventData from "../..data/events.json" assert { type: "json" };
+import eventData from "../../data/events.json" assert { type: "json" };
 import NotFoundError from "../../errors/NotFoundError.js";
 
 const deleteEvent = (id) => {
