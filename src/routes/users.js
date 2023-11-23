@@ -13,4 +13,33 @@ router.get("/", (req, res) => {
     res.status(200).json(users);
 });
 
+router.post("/", (req, res) => {
+    const { username, password, name, image } = req.body;
+    const newUser = createUser(username, password, name, image);
+    res.status(201).json(newUser);
+});
+
+router.get("/:id", (req, res) => {
+    const { id } = req.params;
+    const user = getUserById(id);
+
+    res.status(200).json(user);
+});
+
+router.put("/:id", (req, res) => {
+    const { id } = req.params;
+    const { username, password, name, image } = req.body;
+    const updatedUser = updateUserById(id, username, password, name, image);
+    res.status(200).json(updatedUser);
+});
+
+router.delete("/:id", (req, res) => {
+    const { id } = req.params;
+    const deletedUserId = deleteUser(id);
+
+    res.status(200).json({
+        message: `User with id ${deletedUserId} was deleted.`
+    });
+});
+
 export default router;
