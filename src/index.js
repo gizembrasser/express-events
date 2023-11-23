@@ -7,7 +7,6 @@ import log from "./middleware/logMiddleware.js";
 import "dotenv/config";
 import errorHandler from "./middleware/errorHandler.js";
 import * as Sentry from "@sentry/node";
-import { error } from "winston";
 
 const app = express();
 
