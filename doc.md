@@ -33,7 +33,7 @@
 
 # Authentication middleware
 
-- POST on /users, /events and /categories.
+- POST on /events and /categories (not /users otherwise you can't create an account).
 - PUT, DELETE on /users/:id, /events/:id and /categories/:id.
 
 # Logging middleware

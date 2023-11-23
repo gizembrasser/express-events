@@ -4,6 +4,7 @@ import getUserById from "../services/users/getUserById.js";
 import createUser from "../services/users/createUser.js";
 import updateUserById from "../services/users/updateUserById.js";
 import deleteUser from "../services/users/deleteUser.js";
+import authMiddleware from "../middleware/auth.js";
 import notFoundErrorHandler from "../middleware/notFoundErrorHandler.js";
 
 const router = express.Router();
@@ -26,14 +27,14 @@ router.get("/:id", (req, res) => {
     res.status(200).json(user);
 }, notFoundErrorHandler);
 
-router.put("/:id", (req, res) => {
+router.put("/:id", authMiddleware, (req, res) => {
     const { id } = req.params;
     const { username, password, name, image } = req.body;
     const updatedUser = updateUserById(id, username, password, name, image);
     res.status(200).json(updatedUser);
 }, notFoundErrorHandler);
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", authMiddleware, (req, res) => {
     const { id } = req.params;
     const deletedUserId = deleteUser(id);
 
