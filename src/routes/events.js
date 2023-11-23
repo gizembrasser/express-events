@@ -8,7 +8,7 @@ import deleteEvent from "../services/events/deleteEvent.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    const { createdBy, title } = req.query;
-    const events = getEvents(createdBy, title);
+    const { title } = req.query;
+    const events = getEvents(title);
     res.status(200).json(events);
 });
