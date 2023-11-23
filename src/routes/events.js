@@ -33,4 +33,13 @@ router.put("/:id", (req, res) => {
     res.status(200).json(updatedEvent);
 });
 
+router.delete("/:id", (req, res) => {
+    const { id } = req.params;
+    const deletedEventId = deleteEvent(id);
+
+    res.status(200).json({
+        message: `Event with id ${deletedEventId} was deleted.`
+    });
+});
+
 export default router;
