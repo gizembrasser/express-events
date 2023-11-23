@@ -2,6 +2,7 @@ import express from "express";
 import eventsRouter from "./routes/events.js";
 import usersRouter from "./routes/users.js";
 import categoriesRouter from "./routes/categories.js";
+import log from "./middleware/logMiddleware.js";
 import * as Sentry from "@sentry/node";
 import "dotenv/config";
 
@@ -21,6 +22,8 @@ app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
 app.use(express.json());
+
+app.use(log);
 
 app.use("/events", eventsRouter);
 app.use("/users", usersRouter);
