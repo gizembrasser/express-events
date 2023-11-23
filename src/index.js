@@ -1,4 +1,5 @@
 import express from "express";
+import eventsRouter from "./routes/events.js";
 import * as Sentry from "@sentry/node";
 import "dotenv/config";
 
@@ -18,6 +19,8 @@ app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
 app.use(express.json());
+
+app.use("/events", eventsRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello world!");

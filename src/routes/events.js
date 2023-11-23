@@ -12,3 +12,5 @@ router.get("/", (req, res) => {
     const events = getEvents(title);
     res.status(200).json(events);
 });
+
+export default router;
