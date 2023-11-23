@@ -13,4 +13,10 @@ router.get("/", (req, res) => {
     res.status(200).json(events);
 });
 
+router.post("/", (req, res) => {
+    const { createdBy, title, description, image, categoryIds, location, startTime, endTime } = req.body;
+    const newEvent = createEvent(createdBy, title, description, image, categoryIds, location, startTime, endTime);
+    res.status(201).json(newEvent);
+})
+
 export default router;
