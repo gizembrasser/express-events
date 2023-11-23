@@ -1,4 +1,4 @@
-import userData from "../..data/users.json" assert { type: "json" };
+import userData from "../../data/users.json" assert { type: "json" };
 import NotFoundError from "../../errors/NotFoundError.js";
 
 const deleteUser = (id) => {

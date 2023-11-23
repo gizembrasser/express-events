@@ -1,4 +1,4 @@
-import categoryData from "../..data/categories.json" assert { type: "json" };
+import categoryData from "../../data/categories.json" assert { type: "json" };
 import NotFoundError from "../../errors/NotFoundError.js";
 
 const deleteCategory = (id) => {
