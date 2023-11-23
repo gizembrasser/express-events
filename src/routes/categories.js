@@ -4,6 +4,7 @@ import getCategoryById from "../services/categories/getCategoryById.js";
 import createCategory from "../services/categories/createCategory.js";
 import updateCategoryById from "../services/categories/updateCategoryById.js";
 import deleteCategory from "../services/categories/deleteCategory.js";
+import authMiddleware from "../middleware/auth.js";
 import notFoundErrorHandler from "../middleware/notFoundErrorHandler.js";
 
 const router = express.Router();
@@ -14,7 +15,7 @@ router.get("/", (req, res) => {
     res.status(200).json(categories);
 });
 
-router.post("/", (req, res) => {
+router.post("/", authMiddleware, (req, res) => {
     const { name } = req.body;
     const newCategory = createCategory(name);
     res.status(201).json(newCategory);
@@ -26,14 +27,14 @@ router.get("/:id", (req, res) => {
     res.status(200).json(category);
 }, notFoundErrorHandler);
 
-router.put("/:id", (req, res) => {
+router.put("/:id", authMiddleware, (req, res) => {
     const { id } = req.params;
     const { name } = req.body;
     const updatedCategory = updateCategoryById(id, name);
     res.status(200).json(updatedCategory);
 }, notFoundErrorHandler);
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", authMiddleware, (req, res) => {
     const { id } = req.params;
     const deletedCategoryId = deleteCategory(id);
     res.status(200).json({

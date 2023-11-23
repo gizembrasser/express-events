@@ -4,6 +4,7 @@ import getEventById from "../services/events/getEventById.js";
 import createEvent from "../services/events/createEvent.js";
 import updateEventById from "../services/events/updateEventById.js";
 import deleteEvent from "../services/events/deleteEvent.js";
+import authMiddleware from "../middleware/auth.js";
 import notFoundErrorHandler from "../middleware/notFoundErrorHandler.js";
 
 const router = express.Router();
@@ -14,7 +15,7 @@ router.get("/", (req, res) => {
     res.status(200).json(events);
 });
 
-router.post("/", (req, res) => {
+router.post("/", authMiddleware, (req, res) => {
     const { createdBy, title, description, image, categoryIds, location, startTime, endTime } = req.body;
     const newEvent = createEvent(createdBy, title, description, image, categoryIds, location, startTime, endTime);
     res.status(201).json(newEvent);
@@ -26,14 +27,14 @@ router.get("/:id", (req, res) => {
     res.status(200).json(event);
 }, notFoundErrorHandler);
 
-router.put("/:id", (req, res) => {
+router.put("/:id", authMiddleware, (req, res) => {
     const { id } = req.params;
     const { title, description, image, categoryIds, location, startTime, endTime } = req.body;
     const updatedEvent = updateEventById(id, title, description, image, categoryIds, location, startTime, endTime);
     res.status(200).json(updatedEvent);
 }, notFoundErrorHandler);
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", authMiddleware, (req, res) => {
     const { id } = req.params;
     const deletedEventId = deleteEvent(id);
     res.status(200).json({
