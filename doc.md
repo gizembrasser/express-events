@@ -50,3 +50,17 @@
 
 - Start the server in the folder you want to test with < npm run dev >, then run < npm test >.
 - Restart the server with < npm run dev > every time you execute a test. 
+
+# Connect app to a database
+
+# Install Prisma
+
+# Initiate Prisma Client
+
+# Create schemas of datamodel
+
+# Create seed file to seed the database with existing data
+
+# Use Prisma for queries (CRUD) and querying relationships
+
+# Migrate schema changes
