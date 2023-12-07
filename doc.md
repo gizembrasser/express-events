@@ -58,8 +58,13 @@
 # Initiate Prisma Client
 
 # Create schemas of datamodel
+- ID should be unique identifiers of each model type.
+- Users: the username should also be unique.
+- Each Event has one User who created it.
+- Each Event can have multiple Categories, and each Category can have multiple Events (many-to-many).
 
 # Create seed file to seed the database with existing data
+- 
 
 # Use Prisma for queries (CRUD) and querying relationships
 

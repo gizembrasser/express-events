@@ -11,3 +11,35 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
   relationMode      = "prisma"
 }
+
+model User {
+  id       String  @id @default(uuid())
+  username String  @unique
+  password String
+  name     String
+  image    String?
+  events   Event[]
+}
+
+model Category {
+  name   String
+  id     String  @id @default(uuid())
+  events Event[]
+}
+
+model Event {
+  id          String     @id @default(uuid())
+  createdBy   String
+  title       String
+  description String
+  image       String?
+  // Many-to-many relationship between Event and Category.
+  categoryIds Category[]
+  location    String
+  startTime   DateTime
+  endTime     DateTime
+
+  user User @relation(fields: [createdBy], references: [id])
+
+  @@index([createdBy])
+}
