@@ -64,8 +64,13 @@
 - Each Event can have multiple Categories, and each Category can have multiple Events (many-to-many).
 
 # Create seed file to seed the database with existing data
-- 
+- Should load the data from the JSON files into the database.
+- Create Users and Categories sample data first, then Events.
+- Categories and Events have a many-to-many relationship, consider this when creating the Events. 
 
 # Use Prisma for queries (CRUD) and querying relationships
+- Replace existing services where CRUD methods are used with Prisma Client functions.
+- Implement async...await in the route handlers when calling the services.
+- Make sure unexpected errors are reaching error handler middleware (next(error)).
 
 # Migrate schema changes
