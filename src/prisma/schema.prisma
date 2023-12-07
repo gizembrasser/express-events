@@ -39,7 +39,9 @@ model Event {
   startTime   DateTime
   endTime     DateTime
 
-  user User @relation(fields: [createdBy], references: [id])
+  // 'onDelete: Cascade' means deleting the User also means deleting all related Events.
+  // 'onUpdate: Cascade' means updating the User will also update this field in the Events model.
+  user User @relation(fields: [createdBy], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@index([createdBy])
 }
