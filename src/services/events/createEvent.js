@@ -3,18 +3,24 @@ import { PrismaClient } from "@prisma/client";
 const createEvent = async (createdBy, title, description, image, categoryIds, location, startTime, endTime) => {
     const prisma = new PrismaClient();
 
-    return prisma.event.create({
+    const event = await prisma.event.create({
         data: {
-            createdBy,
+            createdBy: {
+                connect: { id: createdBy }
+            },
             title,
             description,
             image,
-            categoryIds,
+            categoryIds: {
+                connect: categoryIds.map((id) => ({ id }))
+            },
             location,
             startTime,
             endTime
         }
     });
+
+    return event;
 };
 
 export default createEvent;
