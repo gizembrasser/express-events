@@ -5,9 +5,11 @@ const getEvents = async (title) => {
 
     return prisma.event.findMany({
         where: {
-            title
+            title: {
+                contains: title
+            }
         }
-    })
+    });
 };
 
 export default getEvents;
