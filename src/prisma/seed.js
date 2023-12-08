@@ -34,13 +34,15 @@ async function main() {
                 description: event.description,
                 image: event.image,
                 categoryIds: {
-                    // connect creates a many-to-many relationship between Categories and Events.
+                    // In the schema, a many-to-many relationship was established between Events and Categories.
+                    // connect specifies which fields are foreign keys, e.g. the categoryIds.
                     connect: event.categoryIds.map((id) => ({ id }))
                 },
                 location: event.location,
                 startTime: event.startTime,
                 endTime: event.endTime,
                 user: {
+                    // createdBy holds a user.id value, connect specifies the foreign key.
                     connect: { id: event.createdBy }
                 }
             }
