@@ -1,13 +1,13 @@
-import categoryData from "../../data/categories.json" assert { type: "json" };
+import { PrismaClient } from "@prisma/client";
 
-const getCategories = (name) => {
-    let categories = categoryData.categories;
+const getCategories = async (name) => {
+    const prisma = new PrismaClient();
 
-    if (name) {
-        categories = categories.filter(category => category.name === name);
-    }
-
-    return categories;
+    return prisma.category.findMany({
+        where: {
+            name
+        }
+    })
 };
 
 export default getCategories;
