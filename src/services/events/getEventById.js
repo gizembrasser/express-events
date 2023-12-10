@@ -8,7 +8,7 @@ const getEventById = async (id) => {
         where: { id }
     })
 
-    if (!event) {
+    if (!event || event.count === 0) {
         throw new NotFoundError("Event", id);
     }
     return event;
