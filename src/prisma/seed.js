@@ -41,7 +41,7 @@ async function main() {
                 location: event.location,
                 startTime: event.startTime,
                 endTime: event.endTime,
-                user: {
+                createdBy: {
                     // createdBy holds a user.id value, connect specifies the foreign key.
                     connect: { id: event.createdBy }
                 }
