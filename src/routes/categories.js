@@ -9,37 +9,60 @@ import notFoundErrorHandler from "../middleware/notFoundErrorHandler.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    const { name } = req.query;
-    const categories = getCategories(name);
-    res.status(200).json(categories);
+router.get("/", async (req, res, next) => {
+    try {
+        const categories = await getCategories();
+        res.json(categories);
+    } catch (error) {
+        next(error);
+    }
 });
 
-router.post("/", authMiddleware, (req, res) => {
-    const { name } = req.body;
-    const newCategory = createCategory(name);
-    res.status(201).json(newCategory);
+router.post("/", authMiddleware, async (req, res, next) => {
+    try {
+        const { name } = req.body;
+        const newCategory = await createCategory(name);
+
+        res.status(201).json(newCategory);
+    } catch (error) {
+        next(error);
+    }
 });
 
-router.get("/:id", (req, res) => {
-    const { id } = req.params;
-    const category = getCategoryById(id);
-    res.status(200).json(category);
+router.get("/:id", async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const category = await getCategoryById(id);
+
+        res.status(200).json(category);
+    } catch (error) {
+        next(error);
+    }
 }, notFoundErrorHandler);
 
-router.put("/:id", authMiddleware, (req, res) => {
-    const { id } = req.params;
-    const { name } = req.body;
-    const updatedCategory = updateCategoryById(id, name);
-    res.status(200).json(updatedCategory);
+router.put("/:id", authMiddleware, async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { name } = req.body;
+        const updatedCategory = await updateCategoryById(id, { name });
+
+        res.status(200).json(updatedCategory);
+    } catch (error) {
+        next(error);
+    }
 }, notFoundErrorHandler);
 
-router.delete("/:id", authMiddleware, (req, res) => {
-    const { id } = req.params;
-    const deletedCategoryId = deleteCategory(id);
-    res.status(200).json({
-        message: `Category with id ${deletedCategoryId} was deleted.`
-    });
+router.delete("/:id", authMiddleware, async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const deletedCategoryId = await deleteCategory(id);
+
+        res.status(200).json({
+            message: `Category with id ${deletedCategoryId} was deleted.`
+        });
+    } catch (error) {
+        next(error);
+    }
 }, notFoundErrorHandler);
 
 export default router;
