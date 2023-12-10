@@ -14,16 +14,17 @@ const updateEventById = async (id, updatedEvent) => {
         where: { id },
         data: {
             ...rest,
-            createdBy: createdBy
-                ? {
-                    connect: { id: createdBy }
-                }
-                : undefined,
             categoryIds: categoryIds
                 ? {
                     set: categoryIds.map((id) => ({ id }))
                 }
+                : undefined,
+            createdBy: createdBy
+                ? {
+                    connect: { id: createdBy }
+                }
                 : undefined
+
         }
     });
 
