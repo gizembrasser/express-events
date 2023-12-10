@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { v4 as uuid } from "uuid";
 
 const createUser = async (username, password, name, image) => {
     const newUser = {
