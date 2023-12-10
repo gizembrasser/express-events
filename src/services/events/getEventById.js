@@ -11,6 +11,7 @@ const getEventById = async (id) => {
     if (!event || event.count === 0) {
         throw new NotFoundError("Event", id);
     }
+
     return event;
 };
 
