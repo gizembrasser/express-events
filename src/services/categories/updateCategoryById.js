@@ -1,17 +1,15 @@
 import { PrismaClient } from "@prisma/client";
 import NotFoundError from "../../errors/NotFoundError.js";
 
-const updateCategoryById = async (id, name) => {
+const updateCategoryById = async (id, updatedCategory) => {
     const prisma = new PrismaClient();
 
-    const updatedCategory = await prisma.category.updateMany({
+    const category = await prisma.category.updateMany({
         where: { id },
-        data: {
-            name
-        }
+        data: updatedCategory
     })
 
-    if (!updatedCategory || updatedCategory.count === 0) {
+    if (!category || category.count === 0) {
         throw new NotFoundError("Category", id);
     }
 
