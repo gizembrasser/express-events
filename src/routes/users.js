@@ -44,7 +44,7 @@ router.put("/:id", authMiddleware, async (req, res, next) => {
     try {
         const { id } = req.params;
         const { username, password, name, image } = req.body;
-        const updatedUser = await updateUserById(id, username, password, name, image);
+        const updatedUser = await updateUserById(id, { username, password, name, image });
 
         res.status(200).json(updatedUser);
     } catch (error) {
