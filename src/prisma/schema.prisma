@@ -28,20 +28,20 @@ model Category {
 }
 
 model Event {
-  id          String     @id @default(uuid())
+  id          String   @id @default(uuid())
   title       String
   description String
   image       String?
-  // Many-to-many relationship between Event and Category.
-  categoryIds Category[]
   location    String
   startTime   DateTime
   endTime     DateTime
   userId      String
 
+  // Many-to-many relationship between Event and Category.
+  categoryIds Category[]
   // 'onDelete: Cascade' means deleting the User also means deleting all related Events.
   // 'onUpdate: Cascade' means updating the User will also update this field in the Events model.
-  createdBy User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdBy   User       @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@index([userId])
 }
