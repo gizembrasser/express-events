@@ -5,6 +5,7 @@ const getEvents = async (title, location) => {
     const events = await prisma.event.findMany({
         where: {
             title: {
+                // 'contains' is used to specify the query filter.
                 contains: title
             },
             location: {
