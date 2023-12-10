@@ -1,14 +1,16 @@
-import userData from "../../data/users.json" assert { type: "json" };
+import { PrismaClient } from "@prisma/client";
 import NotFoundError from "../../errors/NotFoundError.js";
 
-const deleteUser = (id) => {
-    const index = userData.users.findIndex((user) => user.id === id);
+const deleteUser = async (id) => {
+    const prisma = new PrismaClient();
+    const user = await prisma.user.deleteMany({
+        where: { id }
+    })
 
-    if (index === -1) {
+    if (!user || user.count === 0) {
         throw new NotFoundError("User", id);
     }
 
-    userData.users.splice(index, 1);
     return id;
 }
 

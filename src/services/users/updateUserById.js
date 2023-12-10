@@ -1,19 +1,20 @@
-import userData from "../../data/users.json" assert { type: "json" };
+import { PrismaClient } from "@prisma/client";
 import NotFoundError from "../../errors/NotFoundError.js";
 
-const updateUserById = (id, username, password, name, image) => {
-    const user = userData.users.find(user => user.id === id);
+const updateUserById = async (id, updatedUser) => {
+    const prisma = new PrismaClient();
+    const user = await prisma.user.updateMany({
+        where: { id },
+        data: updatedUser
+    })
 
-    if (!user) {
+    if (!user || user.count === 0) {
         throw new NotFoundError("User", id);
     }
 
-    user.username = username ?? user.username;
-    user.password = password ?? user.password;
-    user.name = name ?? user.name;
-    user.image = image ?? user.image;
-
-    return user;
+    return {
+        message: `User with id ${id} was updated.`
+    }
 };
 
 export default updateUserById;
